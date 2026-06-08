@@ -1,16 +1,35 @@
 {
-  "name": "collectsysteminfo-nodejs",
-  "type": "module",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "sysinfo-report",
+  "version": "2.0.0",
+  "main": "collectSystemInfo.js",
+  "bin": "collectSystemInfo.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":          "node collectSystemInfo.js",
+    "build:win":      "pkg . --targets node18-win-x64      --output dist/sysinfo-report-win.exe",
+    "build:linux":    "pkg . --targets node18-linux-x64    --output dist/sysinfo-report-linux",
+    "build:mac-intel":"pkg . --targets node18-macos-x64    --output dist/sysinfo-report-macos-intel",
+    "build:mac-arm":  "pkg . --targets node18-macos-arm64  --output dist/sysinfo-report-macos-arm",
+    "build:all":      "npm run build:win && npm run build:linux && npm run build:mac-intel && npm run build:mac-arm"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Ferramenta para técnicos coletarem e visualizarem configurações do sistema",
   "dependencies": {
     "systeminformation": "^5.23.5"
+  },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^5.11.5"
+  },
+  "pkg": {
+    "assets": [
+      "node_modules/systeminformation/**/*"
+    ],
+    "targets": [
+      "node18-win-x64",
+      "node18-linux-x64",
+      "node18-macos-x64",
+      "node18-macos-arm64"
+    ]
   }
 }
