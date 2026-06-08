@@ -142,4 +142,4 @@ ISC
 
 ---
 
-Feito com 💜 por Vitor Madalosso
+Feito com 💜 por [Vitor Madalosso](https://github.com/vmadalosso)
