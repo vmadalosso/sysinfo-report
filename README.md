@@ -142,4 +142,4 @@ ISC
 
 ---
 
-Feito com 💜 por Vitor Madalosso
+Built with 💜 & 🤖 by Vitor Madalosso
