@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=ISC&color=BD93F9&labelColor=282A36">
+  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=BD93F9&labelColor=282A36">
   <img alt="Node" src="https://img.shields.io/static/v1?label=node&message=%3E%3D18&color=50FA7B&labelColor=282A36">
   <img alt="Language" src="https://img.shields.io/static/v1?label=lang&message=JavaScript&color=F1FA8C&labelColor=282A36">
   <img alt="Platform" src="https://img.shields.io/static/v1?label=platform&message=Windows+%7C+Linux+%7C+macOS&color=FF79C6&labelColor=282A36">
