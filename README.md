@@ -1,74 +1,114 @@
-# SysInfo Report
+<h1 align="center">SysInfo Report</h1>
 
-Ferramenta de diagnóstico de sistema para técnicos de informática. Coleta informações completas do hardware e sistema operacional e exibe tudo em uma interface web local com tema Dracula, atualização em tempo real e exportação para CSV. Funciona como executável standalone — sem precisar instalar Node.js na máquina do cliente.
+<p align="center">
+  Standalone system diagnostic tool that collects hardware and OS info and displays it in a local web UI.
+</p>
 
----
+<p align="center">
+  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=ISC&color=BD93F9&labelColor=282A36">
+  <img alt="Node" src="https://img.shields.io/static/v1?label=node&message=%3E%3D18&color=50FA7B&labelColor=282A36">
+  <img alt="Language" src="https://img.shields.io/static/v1?label=lang&message=JavaScript&color=F1FA8C&labelColor=282A36">
+  <img alt="Platform" src="https://img.shields.io/static/v1?label=platform&message=Windows+%7C+Linux+%7C+macOS&color=FF79C6&labelColor=282A36">
+</p>
 
-## Funcionalidades
-
-- **Interface web local** com tema Dracula, cards organizados por categoria e barras de progresso
-- **Atualização automática** a cada 30 segundos sem recarregar a página
-- **Abre o navegador automaticamente** ao iniciar (macOS, Windows e Linux)
-- **Exportação para CSV** compatível com Excel (BOM UTF-8)
-- **Executável standalone** — usuário final não precisa instalar Node.js
-- **Cross-compilation** — gera `.exe` do Windows a partir do macOS
-
-### Dados coletados
-
-| Categoria     | Detalhes                                                                 |
-| ------------- | ------------------------------------------------------------------------ |
-| Sistema       | Fabricante, modelo, serial, placa-mãe, versão da BIOS, uptime            |
-| S.O.          | Distro, versão, build, arquitetura, hostname, fuso horário               |
-| CPU           | Modelo, fabricante, velocidade base/turbo, núcleos, threads, temperatura |
-| RAM           | Total, uso atual, disponível; slots com tipo DDR e frequência            |
-| Armazenamento | Discos físicos (tipo SSD/HDD/NVMe) com uso por partição                  |
-| GPU           | Modelo, fabricante, VRAM                                                 |
-| Monitores     | Modelo real (via EDID), conexão, resolução, taxa de atualização          |
-| Rede          | Interfaces ativas com IP, nome da rede Wi-Fi (SSID), MAC, tipo           |
-| Bateria       | Percentual, status de carga, tempo restante                              |
-| Periféricos   | Impressoras instaladas, dispositivos USB conectados                      |
-
-> No macOS, o nome exato do monitor é lido via `system_profiler SPDisplaysDataType` (EDID), o que retorna o modelo real — ex: "BenQ GL2780" — em vez de um identificador genérico.
+<p align="center">
+  <a href="#about">About</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#tech-stack">Tech Stack</a> ·
+  <a href="#getting-started">Getting Started</a> ·
+  <a href="#running-as-standalone-executable">Standalone Executable</a> ·
+  <a href="#building-executables">Building</a> ·
+  <a href="#configuration">Configuration</a>
+</p>
 
 ---
 
-## Stack
+## About
 
-- **Runtime:** [Node.js 18+](https://nodejs.org)
-- **Coleta de dados:** [systeminformation](https://systeminformation.io)
-- **Servidor HTTP:** `node:http` nativo — sem frameworks externos
-- **Frontend:** HTML/CSS/JS vanilla com [Dracula Theme](https://draculatheme.com)
-- **Build/distribuição:** [`@yao-pkg/pkg`](https://github.com/yao-pkg/pkg)
+**SysInfo Report** is a system diagnostic tool for IT technicians. It collects comprehensive hardware and OS information and displays everything in a local web interface with the Dracula theme, real-time updates, and CSV export. It ships as a standalone executable — no Node.js installation required on the end-user's machine.
 
 ---
 
-## Como usar
+## Features
 
-### Com Node.js
+- **Local web UI** with Dracula theme, category cards, and progress bars
+- **Auto-refresh** every 30 seconds without reloading the page
+- **Opens the browser automatically** on startup (macOS, Windows, and Linux)
+- **CSV export** compatible with Excel (UTF-8 BOM)
+- **Standalone executable** — no Node.js needed on the end-user's machine
+- **Cross-compilation** — build a Windows `.exe` from macOS
+
+### Collected Data
+
+| Category    | Details                                                               |
+| ----------- | --------------------------------------------------------------------- |
+| System      | Manufacturer, model, serial number, motherboard, BIOS version, uptime |
+| OS          | Distro, version, build, architecture, hostname, timezone              |
+| CPU         | Model, manufacturer, base/turbo speed, cores, threads, temperature    |
+| RAM         | Total, current usage, available; slots with DDR type and frequency    |
+| Storage     | Physical disks (SSD/HDD/NVMe) with per-partition usage                |
+| GPU         | Model, manufacturer, VRAM                                             |
+| Monitors    | Real model name (via EDID), connection, resolution, refresh rate      |
+| Network     | Active interfaces with IP, Wi-Fi network name (SSID), MAC, type       |
+| Battery     | Percentage, charging status, remaining time                           |
+| Peripherals | Installed printers, connected USB devices                             |
+
+> On macOS, the exact monitor name is read via `system_profiler SPDisplaysDataType` (EDID), returning the real model — e.g. "BenQ GL2780" — instead of a generic identifier.
+
+---
+
+## Tech Stack
+
+| Tool                                                                  | Purpose                                   |
+| --------------------------------------------------------------------- | ----------------------------------------- |
+| [Node.js 18+](https://nodejs.org)                                     | Runtime                                   |
+| [systeminformation](https://systeminformation.io)                     | Hardware/OS data collection               |
+| `node:http` (native)                                                  | HTTP server — no external frameworks      |
+| HTML / CSS / JS (vanilla) + [Dracula Theme](https://draculatheme.com) | Frontend                                  |
+| [`@yao-pkg/pkg`](https://github.com/yao-pkg/pkg)                      | Build & distribution as standalone binary |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) >= 18
+
+### 1. Clone the repository
 
 ```bash
-# Instalar dependências (apenas na primeira vez)
-npm install
+git clone https://github.com/vmadalosso/sysinfo-report.git
+cd sysinfo-report
+```
 
-# Iniciar
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run
+
+```bash
 npm start
 ```
 
-O navegador abre automaticamente em `http://localhost:9999`.
+The browser opens automatically at `http://localhost:9999`.
 
-Para usar outra porta:
+To use a different port:
 
 ```bash
 PORT=8080 node collectSystemInfo.js
 ```
 
-`Ctrl+C` para encerrar.
+Press `Ctrl+C` to stop.
 
 ---
 
-### Com o executável (sem Node.js)
+## Running as Standalone Executable
 
-Baixe o binário correspondente à plataforma e execute:
+Download the binary for your platform and run it directly — no Node.js installation required.
 
 **Windows**
 
@@ -76,7 +116,7 @@ Baixe o binário correspondente à plataforma e execute:
 sysinfo-report-win.exe
 ```
 
-> O Windows Defender SmartScreen pode exibir um aviso na primeira execução por falta de assinatura digital. Clique em **"Mais informações" → "Executar assim mesmo"**.
+> Windows Defender SmartScreen may show a warning on first run due to the lack of a digital signature. Click **"More info" → "Run anyway"**.
 
 **Linux**
 
@@ -88,18 +128,17 @@ chmod +x sysinfo-report-linux
 **macOS**
 
 ```bash
-chmod +x sysinfo-report-macos-arm   # ou sysinfo-report-macos-intel
+chmod +x sysinfo-report-macos-arm   # or sysinfo-report-macos-intel
 ./sysinfo-report-macos-arm
 ```
 
-> Se o macOS bloquear: **Preferências do Sistema → Privacidade e Segurança → "Abrir assim mesmo"**.
+> If macOS blocks the binary: **System Settings → Privacy & Security → "Open Anyway"**.
 
 ---
 
-## Gerar os executáveis
+## Building Executables
 
 ```bash
-# Instalar dependências (inclui @yao-pkg/pkg)
 npm install
 
 mkdir -p dist
@@ -108,38 +147,40 @@ npm run build:win        # → dist/sysinfo-report-win.exe
 npm run build:linux      # → dist/sysinfo-report-linux
 npm run build:mac-arm    # → dist/sysinfo-report-macos-arm   (M1/M2/M3/M4)
 npm run build:mac-intel  # → dist/sysinfo-report-macos-intel (Intel)
-npm run build:all        # todos de uma vez
+npm run build:all        # all at once
 ```
 
-O `pkg` faz cross-compilation — é possível gerar o `.exe` rodando o build no macOS, sem precisar de uma máquina Windows.
+`pkg` supports cross-compilation — you can build the Windows `.exe` from macOS without a Windows machine.
 
-O primeiro build demora mais porque o `pkg` baixa o binário do Node para cada plataforma-alvo. Os seguintes são rápidos.
+The first build takes longer as `pkg` downloads the Node.js binary for each target platform. Subsequent builds are fast.
 
-**Tamanho dos binários gerados**
+**Binary sizes**
 
-| Plataforma  | Arquivo                      | Tamanho aprox. |
-| ----------- | ---------------------------- | -------------- |
-| Windows x64 | `sysinfo-report-win.exe`     | ~55–70 MB      |
-| Linux x64   | `sysinfo-report-linux`       | ~45–60 MB      |
-| macOS ARM   | `sysinfo-report-macos-arm`   | ~45–60 MB      |
-| macOS Intel | `sysinfo-report-macos-intel` | ~45–60 MB      |
+| Platform    | File                         | Approx. size |
+| ----------- | ---------------------------- | ------------ |
+| Windows x64 | `sysinfo-report-win.exe`     | ~55–70 MB    |
+| Linux x64   | `sysinfo-report-linux`       | ~45–60 MB    |
+| macOS ARM   | `sysinfo-report-macos-arm`   | ~45–60 MB    |
+| macOS Intel | `sysinfo-report-macos-intel` | ~45–60 MB    |
 
-O tamanho inclui o runtime do Node.js inteiro embutido no binário.
-
----
-
-## Configuração
-
-| Variável | Padrão | Descrição              |
-| -------- | ------ | ---------------------- |
-| `PORT`   | `9999` | Porta do servidor HTTP |
+Size includes the entire Node.js runtime embedded in the binary.
 
 ---
 
-## Licença
+## Configuration
 
-ISC
+| Variable | Default | Description      |
+| -------- | ------- | ---------------- |
+| `PORT`   | `9999`  | HTTP server port |
 
 ---
 
-Feito com 💜 por Vitor Madalosso
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+<p align="center">
+  Made with ♥ by <a href="https://github.com/vmadalosso">Vitor Madalosso</a>
+</p>
